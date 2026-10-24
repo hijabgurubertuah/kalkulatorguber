@@ -1,0 +1,291 @@
+Berkas ini berisi perintah lengkap untuk membangun sebuah aplikasi web. Baca seluruh isinya dan jalankan semuanya secara berurutan dari atas ke bawah tanpa melewatkan satu bagian pun.
+
+Buatkan aplikasi web kalkulator serba guna bernama "Kalkulator Guber Smart" dengan spesifikasi berikut.
+
+PENTING: tampilan aplikasi harus bersih dan profesional seperti produk jadi, sempurna dan responsif di layar HP (menu, tombol, dan semua elemen rapi, proporsional, tidak ada yang tersembunyi), tanpa satu pun teks petunjuk, penjelasan fungsi, atau keterangan teknis (termasuk soal unggah file, Drive, Apps Script, atau spreadsheet). Hanya label, konten, pesan galat, dan notifikasi hasil aksi yang boleh tampil. Tombol, menu, dan kolom harus mudah dipakai dan dipahami lewat label yang jelas saja, tanpa ikon dekoratif dan tanpa badge atau chip berbentuk tombol palsu.
+
+## 1. Tujuan dan Pengguna
+Kalkulator lengkap yang terbuka untuk siapa saja tanpa daftar dan tanpa login. Pengguna ingin menghitung dengan cepat dan akurat, mulai dari hitungan sehari-hari, perhitungan ilmiah dan programmer, konversi satuan, persen, diskon, PPN, sampai selisih tanggal. Aplikasi tidak menyimpan data apa pun: tidak ada akun, tidak ada penyimpanan di peramban, dan tidak ada server. Semua perhitungan berjalan di perangkat pengguna dan hilang saat halaman ditutup atau dimuat ulang.
+
+## 2. Bahasa dan Nada
+- Bahasa tampilan: Indonesia. Label singkat dan langsung (Standar, Ilmiah, Riwayat, Salin, Tukar, Hitung).
+- Tidak ada slogan, kalimat pengantar, atau teks penjelasan di mana pun.
+- Format angka gaya Indonesia: titik sebagai pemisah ribuan dan koma sebagai pemisah desimal (contoh 1.234.567,89). Tombol desimal berlabel koma.
+- Nama aplikasi di header: Kalkulator Guber Smart.
+
+## 3. Tampilan dan Desain
+- Warna utama: #0D9488 (toska), sekunder: #0F766E (toska tua), aksen: #2DD4BF (toska terang), latar halaman: #F0FDFA, permukaan kartu dan tombol angka: #FFFFFF, teks utama: #0F2E2C, teks sekunder: #3F6F6B, garis tepi: #CCEBE7.
+- Tombol angka: latar #FFFFFF, teks #0F2E2C. Tombol operator dan fungsi: latar #CCFBF1, teks #0F766E. Tombol sama dengan (=): latar #0F766E, teks #FFFFFF, paling menonjol. Tombol hapus (C): latar #FEF2F2, teks #DC2626.
+- Jenis huruf: judul "Plus Jakarta Sans", isi dan angka layar "Inter" dengan angka berlebar seragam (tabular), cadangan sans-serif.
+- Kesan modern, segar, dan lega: sudut membulat 16px pada kartu dan 14px pada tombol, bayangan lembut yang konsisten, tombol besar dengan jarak lega, tanpa ikon dekoratif.
+- Layar hasil besar: rumus di baris atas (huruf lebih kecil, warna teks sekunder), hasil di baris bawah (huruf 40-56px yang otomatis mengecil agar angka panjang tidak terpotong).
+- Satu tema saja (terang bernuansa toska). Tidak ada mode gelap dan tidak ada tombol pengalih tema.
+- Perangkat utama: HP (layar 360-430px adalah prioritas utama); desktop adalah tampilan kedua.
+
+## Aturan Tampilan Profesional dan Responsif (WAJIB DIPATUHI, TANPA PENGECUALIAN)
+
+Tampilan harus seperti produk jadi yang rapi dan profesional, bukan prototipe.
+
+LARANGAN MUTLAK: TIDAK ADA SATU PUN teks petunjuk, penjelasan, atau keterangan fungsi di antarmuka. Ini berlaku untuk semua halaman, formulir, dialog, dan dashboard admin.
+
+Contoh yang DILARANG tampil di UI (dan semua kalimat serupa):
+- "Gunakan tombol ini untuk mengunggah gambar."
+- "Gambar akan disimpan ke Drive melalui Apps Script." atau penyebutan Drive, Apps Script, base64, atau cara kerja teknis apa pun.
+- "Format yang didukung: JPG, PNG. Maksimal 5 MB." (batas hanya diperiksa di kode; pesan muncul HANYA bila pengguna melanggar)
+- "Isi kolom di bawah ini...", "Klik di sini untuk...", "Fitur ini digunakan untuk...", "Catatan:", "Tips:", "Perhatian:"
+- Teks kecil abu-abu di bawah tombol, kolom, judul, atau kartu yang menjelaskan fungsinya.
+- Tooltip, balon petunjuk, tur, onboarding, banner "Cara menggunakan", badge "Baru" atau "Demo", kata simulasi/demo/mock, dan komentar pengembang.
+- Paragraf pengantar di atas formulir atau tabel.
+
+HANYA teks berikut yang boleh tampil:
+1. Konten asli aplikasi (isi berita, nama produk, data).
+2. Judul halaman dan judul bagian (satu frasa singkat).
+3. Label tombol dan menu (kata kerja singkat, 1-3 kata).
+4. Label kolom isian (satu frasa singkat, tetap tampil di atas kolom, tanda * untuk yang wajib).
+5. Pesan kesalahan validasi, hanya saat terjadi kesalahan.
+6. Notifikasi singkat hasil aksi (misalnya "Berhasil disimpan", "Gagal mengunggah", "Berhasil dihapus") yang tampil hanya 0,5 detik lalu hilang sendiri, dan teks status biasa tanpa bingkai (misalnya "Offline" saat tidak ada internet, atau "Belum aktif" pada tab yang belum diaktifkan).
+7. Judul singkat keadaan kosong (misalnya "Belum ada data"), tanpa kalimat penjelasan.
+Placeholder kolom dikosongkan, atau berisi contoh isi murni (misalnya nama orang), tidak pernah berupa kalimat instruksi.
+
+MUDAH DIGUNAKAN DAN DIPAHAMI TANPA PENJELASAN:
+- Tombol berlabel kata kerja singkat yang langsung jelas (Simpan, Tambah Siswa, Unduh Laporan, Cari, Pilih Gambar). Ikon HANYA untuk kontrol interaktif fungsional (panah geser carousel, panah buka/tutup akordeon, tombol hapus dan edit, tombol WhatsApp, ikon hamburger pembuka sidebar) dan diberi aria-label tersembunyi, bukan tulisan tampil.
+- Gunakan pola antarmuka yang sudah dikenal: kolom unggah berupa satu tombol "Pilih Gambar" atau "Pilih Dokumen"; setelah file dipilih tampilkan pratinjau (gambar kecil, atau nama file untuk dokumen) dan ikon hapus; saat mengunggah tampilkan indikator putar pada tombol, tanpa tulisan penjelasan.
+- Satu aksi utama per layar: tombol utama berwarna aksen dan menonjol, aksi sekunder berbentuk garis tepi, aksi berbahaya berwarna merah dan meminta konfirmasi lewat dialog singkat (judul dan dua tombol saja).
+- Posisi konsisten di seluruh aplikasi: tombol Tambah di kanan atas daftar; Simpan dan Batal di kanan bawah formulir; pencarian dan filter di atas tabel; menu selalu di tempat yang sama.
+- SEMUA kolom edit atau input teks (kolom teks panjang, deskripsi, editor teks, dan sejenisnya) otomatis membesar ke bawah mengikuti isi yang diketik, tanpa bilah gulir internal dan tanpa perlu ditarik manual; tinggi awal ringkas (satu atau dua baris) dan tidak terbatas ke bawah. Berlaku di semua formulir, CMS, panel admin, HP, dan desktop.
+- Formulir dikelompokkan dalam bagian berjudul singkat, urutan kolom mengikuti urutan pikiran pengguna, kolom pilihan memakai dropdown atau pilihan bertombol dengan label jelas.
+- Menu dikelompokkan logis dan hanya berisi teks (tanpa ikon dekoratif), item aktif disorot jelas.
+- Hierarki visual jelas: ukuran huruf konsisten untuk judul halaman, judul bagian, dan isi; kontras warna cukup; tabel dengan judul kolom jelas.
+
+MENU, DROPDOWN, DAN PANEL MELAYANG (dropdown pilihan, sidebar, menu aksi baris tabel, menu profil, pemilih tanggal, notifikasi, popover):
+- Selalu tampil penuh di dalam layar, termasuk di ponsel kecil: tidak terpotong, tidak tersembunyi di balik elemen lain, tidak membuat halaman bergeser ke samping. Menu tampil di lapisan paling atas sehingga tidak terpotong oleh kartu, kontainer, atau tabel yang bisa digulir.
+- Posisi menyesuaikan ruang: bila tidak muat di bawah, tampil ke atas; bila tidak muat di kanan, geser ke kiri. Lebar maksimum = lebar layar dikurangi 16px; tinggi maksimum = tinggi layar dikurangi 32px dengan gulir di dalam menu. Di ponsel, menu panjang atau pemilih tampil sebagai panel dari bawah (bottom sheet).
+- Menutup otomatis saat pengguna mengetuk atau mengklik di luar area menu, menekan Escape, memilih satu item, berpindah halaman, atau membuka menu lain. Hanya satu menu terbuka pada satu waktu.
+- Area sentuh tiap item minimal 44px; item aktif jelas; navigasi keyboard (panah, Enter) berfungsi di desktop.
+- Dialog (modal) juga responsif: lebar maksimum layar dikurangi 32px, isi bisa digulir, tombol aksi selalu terlihat, dan menutup bila lapisan gelap di luarnya diketuk (kecuali formulir yang sedang diisi, yang meminta konfirmasi singkat).
+
+KERAPIAN VISUAL: spasi lega, grid konsisten, tidak penuh sesak, tidak ada elemen dekoratif tanpa fungsi, bayangan dan sudut membulat konsisten, tampilan bersih dan hemat ruang vertikal dengan mengandalkan tipografi murni, spasi lega, dan hierarki teks yang jelas.
+
+TEMA: tidak ada tombol atau fitur pengalih tema terang/gelap. Aplikasi memakai satu tema yang mengikuti warna tema aplikasi.
+
+NOTIFIKASI: semua notifikasi (misalnya berhasil disimpan, berhasil dihapus) tampil hanya 0,5 detik (500 ms) lalu hilang sendiri, tanpa tombol tutup.
+
+LARANGAN PILL BADGE DAN TOMBOL PALSU: dilarang membungkus teks metadata, label fitur, atau kata penegas dalam bentuk kapsul lonjong, chip, badge, atau kotak berbingkai (pill badge atau rounded chip) yang menyerupai tombol tetapi tidak bisa diklik. Jangan buat elemen visual apa pun yang tampak seperti tombol jika elemen itu tidak memiliki fungsi klik atau aksi. Teks penegas hanya boleh berupa teks biasa tanpa bingkai, atau langsung dihilangkan. Teks status (misalnya "Belum aktif", "Offline") juga berupa teks biasa tanpa bingkai.
+
+LARANGAN IKON DEKORATIF DAN ORNAMEN PENGHIAS: dilarang menempatkan ikon dekoratif tanpa fungsi di atas kartu, judul, atau blok teks (seperti ikon tanda seru di atas kartu masalah, ikon hiasan di atas kartu manfaat, atau ikon ilustrasi kecil di samping judul). Jangan gunakan ikon hanya sebagai pemanis visual atau pengisi ruang kosong. Tampilan, khususnya di layar HP, harus bersih, minimalis, dan hemat ruang vertikal dengan mengandalkan kekuatan tipografi murni, spasi lega, dan hierarki teks yang jelas. Ikon HANYA diperbolehkan untuk kontrol interaktif fungsional yang memerlukan aksi klik atau sentuh langsung (seperti tombol panah geser carousel, panah buka/tutup akordeon, tombol hapus dan edit, dan tombol kontak WhatsApp). Keadaan kosong hanya berupa judul singkat, tanpa ikon atau ilustrasi.
+
+TAMPILAN HP ADALAH PRIORITAS UTAMA. Sebagian besar pengguna memakai HP, jadi semua menu, tombol, formulir, tabel, dialog, dan panel admin harus rapi, proporsional, mudah dipahami, dan mudah dioperasikan dengan satu jari di layar 360-430px. Desktop tetap rapi sebagai tampilan kedua. Tidak boleh ada tombol atau menu yang tersembunyi, berantakan, terpotong, tumpang tindih, atau tidak proporsional.
+
+SIDEBAR TERSEMBUNYI DI HP (wajib persis seperti ini):
+- Khusus tampilan HP, semua bilah menu (di tampilan publik maupun admin) berupa sidebar yang tersembunyi dan dimunculkan dengan tombol pembuka.
+- Bilah atas (header) di HP HANYA berisi logo atau nama. HAPUS semua tombol menu atau hamburger dari header; tidak boleh ada tombol hamburger atau tombol lain untuk membuka sidebar di header.
+- Tombol pembuka sidebar berada di tepi kiri layar, tepat di tengah tinggi layar, dan tidak ikut ter-scroll (tetap di tempat saat halaman digulir). Ukurannya tinggi 120px dan lebar 25px, sedikit membulat, warna mengikuti warna tema aplikasi yang sedang aktif dengan sedikit transparan agar tampil modern, dan hanya berisi satu ikon hamburger tanpa teks apa pun.
+- Saat sidebar dibuka: layar di belakangnya terkunci sehingga saat isi sidebar digulir layar latar tidak ikut ter-scroll; ada lapisan gelap di belakang sidebar; mengetuk area di luar sidebar otomatis menutup sidebar; isi menu di dalam sidebar bisa digulir mandiri dengan rapi.
+- SELURUH isi menu terlihat penuh di dalam layar, tidak terpotong dan tidak keluar layar. Item tersusun vertikal satu kolom, rata kiri, hanya teks (tanpa ikon), tinggi tiap item minimal 48px, huruf minimal 16px, jarak seragam, item aktif disorot. Submenu berupa akordeon di dalam sidebar.
+- Item "Masuk" (login) adalah satu item biasa di daftar menu sidebar, item terakhir, bergaya sama dengan item lain, dan tidak boleh menggeser, menyembunyikan, atau memperkecil item menu lain. Di desktop, "Masuk" adalah item terakhir di deretan menu; bila deretan menu terlalu penuh, beralih ke sidebar pada lebar yang lebih besar daripada membiarkan menu bertumpuk atau terpotong.
+
+TAMPILAN COMPACT DI HP UNTUK MENU DAN FITUR DI ISI HALAMAN: bila ada menu atau fitur yang berisi ikon dan teks, rapikan letaknya dan jangan memakan tempat. Jangan susun ikon di kiri dengan tulisan di bawahnya rata kiri karena memakan tempat dan kurang rapi. Ikon tidak penting; jangan fokus membuat ikon yang membuat tampilan tidak rapi dan mubazir. Gunakan teks ringkas yang compact.
+
+STANDAR TAMPILAN HP LAINNYA:
+- Tidak ada elemen yang lebih lebar dari layar dan tidak ada gulir ke samping.
+- Semua tombol dan tautan minimal 44px dengan jarak cukup, tidak berhimpitan.
+- Huruf isi minimal 16px; judul proporsional (tidak memenuhi layar); kolom isian setinggi minimal 48px dengan huruf 16px.
+- Satu kolom; kartu penuh lebar dengan jarak samping sekitar 16px; tabel menjadi kartu bertumpuk.
+- Formulir panjang memiliki bilah aksi di bawah layar (Simpan dan Batal) yang selalu terlihat; tombol aksi penuh lebar.
+- Gambar dan video berukuran proporsional dengan rasio tetap dan tidak terpotong aneh; peta dan video profil penuh lebar.
+- Banner utama tidak lebih tinggi dari satu layar dan teks di atasnya terbaca jelas.
+- Dialog tampil sebagai panel dari bawah atau hampir penuh layar dengan tombol tutup yang jelas; tombol aksi dialog selalu terlihat.
+- Menghormati area aman layar (lekukan kamera dan bilah gestur) sehingga tombol tidak tertutup.
+- Panel admin di HP memakai sidebar tersembunyi yang sama; tabel data menjadi daftar kartu dengan menu aksi ringkas; grafik menyesuaikan lebar layar.
+- Interaksi sentuh mulus: gulir halus tanpa tersendat, gestur geser (galeri, carousel, sidebar) mengikuti jari dan berhenti rapi, tidak ada gulir ganda atau halaman terkunci, tidak ada lonjakan tampilan saat memuat.
+- Sebelum dianggap selesai, periksa setiap halaman di lebar 360px, 390px, dan 430px: tidak ada tombol tersembunyi, teks terpotong, tumpang tindih, atau elemen tidak proporsional.
+
+TABLET DAN DESKTOP: tablet (768-1024px) dua kolom bila sesuai; desktop (di atas 1024px) navigasi atas atau sidebar untuk dashboard admin, grid beberapa kolom, lebar konten dibatasi agar nyaman dibaca, tabel penuh.
+
+Seluruh penjelasan teknis (Drive, Apps Script, spreadsheet, base64, batas ukuran, tipe file) hanya berada di kode dan komentar kode, TIDAK PERNAH di tampilan. Aturan ini berlaku sama untuk dashboard admin, panel CMS, dan tab Sinkronisasi (tab ini hanya boleh berisi kotak kode, label, kolom, tombol, dan status).
+
+## Aturan Desain Permanen (kunci di kode)
+Buat satu berkas aturan desain permanen di dalam proyek (misalnya di folder konstanta dengan nama designSystem) yang memuat aturan tampilan di bawah ini sebagai komentar dan konstanta. Di baris paling atas setiap komponen utama (halaman publik, panel admin, CMS, formulir, dan komponen bersama) tambahkan penanda: "// ATURAN BAKU: lihat designSystem. UI harus selalu minimalis, bersih, dan tanpa teks petunjuk." Setiap revisi atau penambahan fitur pada proyek ini WAJIB membaca dan mematuhi berkas itu lebih dulu, tanpa perlu diingatkan pengguna di setiap chat.
+
+Isi aturan:
+- Prinsip: minimalis, bersih, ringkas, dan jelas, tampil seperti produk jadi yang profesional.
+- Tanpa teks panjang: dilarang paragraf instruksi, tips, teks bantuan, atau penjelasan fungsi di seluruh tampilan, formulir, dan pengaturan CMS, termasuk penjelasan teknis (Drive, Apps Script, spreadsheet, format dan batas file).
+- Teks hanya label singkat 1-3 kata. Placeholder dikosongkan atau berisi contoh isi murni, bukan instruksi.
+- Tombol aksi (Simpan, Hapus, Kosongkan) tegas, langsung, dan fungsional, dengan label kata kerja singkat.
+- Setiap kolom gambar selalu punya tombol "Hapus Gambar" berikon tempat sampah di samping pratinjau; logo, banner, dan gambar popup juga bisa dihapus satu per satu (dan "Hapus Semua" untuk banner bila ada banyak).
+- Judul dan subjudul banner (dan teks serupa) boleh dikosongkan, dengan tombol cepat "Kosongkan". Bila teks kosong, tampilkan gambar murni tanpa gradien, lapisan gelap, atau wadah teks yang menutupi gambar.
+- Semua kolom edit atau input teks otomatis membesar ke bawah mengikuti isinya, tanpa bilah gulir internal.
+- Tidak ada gambar bawaan yang ditulis mati di kode atau komponen. Semua gambar berasal dari pengaturan yang bisa diganti atau dihapus dari panel; bila kosong tampilkan kerangka netral.
+- Tidak ada tombol pengalih tema terang/gelap. Notifikasi hasil aksi tampil hanya 0,5 detik lalu hilang sendiri.
+- Di HP: header hanya berisi logo atau nama; menu berupa sidebar tersembunyi yang dibuka tombol 120x25 berikon hamburger di tepi kiri tengah layar, tidak ikut ter-scroll, dengan layar belakang terkunci saat sidebar terbuka dan ketuk di luar untuk menutup.
+- Dilarang pill badge, chip, atau kotak berbingkai yang menyerupai tombol tetapi tidak bisa diklik; dilarang ikon dekoratif tanpa fungsi (ikon hanya untuk kontrol interaktif fungsional); tampilan compact dan hemat ruang vertikal.
+- Visual bersih: spasi lega, tanpa elemen dekoratif tanpa fungsi, dan tampilan HP tetap rapi, proporsional, serta tidak ada elemen tersembunyi.
+- Setiap perubahan baru mempertahankan semua aturan di atas. Jika sebuah permintaan bertentangan dengan aturan ini, tetap patuhi aturan dan sampaikan secara singkat di respons, bukan di tampilan aplikasi.
+
+## 4. Struktur Halaman dan Navigasi
+
+Model akses: seluruh aplikasi terbuka untuk publik tanpa login. Tidak ada Bagian Admin, Bagian Superadmin, panel pengelola, CMS, maupun item menu "Masuk"; karena itu semua aturan di atas yang menyangkut login dan admin tidak dibuat.
+
+Bagian Publik (semua halaman terbuka untuk siapa saja):
+
+Header dan menu
+- Di HP: header hanya berisi nama "Kalkulator Guber Smart". Semua menu berupa sidebar tersembunyi dengan tombol pembuka 120x25 di tepi kiri tengah layar sesuai aturan di atas.
+- Di desktop: header berisi nama di kiri dan menu horizontal di kanan; bila terlalu penuh, beralih ke sidebar.
+- Isi menu, dua kelompok: kelompok "Kalkulator" berisi Standar, Ilmiah, Programmer; kelompok "Alat Hitung" berisi Konversi Satuan, Persen dan Diskon, Tanggal. Item aktif disorot. Halaman pertama saat aplikasi dibuka adalah Standar.
+
+Halaman Standar (urutan dari atas ke bawah)
+1. Layar: baris rumus, baris hasil, tombol Salin di sudut layar, dan penanda "M" berupa teks biasa saat memori terisi.
+2. Baris memori: MC, MR, M+, M−, ditambah tombol Riwayat.
+3. Tombol angka dan operator.
+4. Footer.
+
+Halaman Ilmiah: layar yang sama seperti Standar, baris memori dan Riwayat, grid fungsi ilmiah, lalu keypad angka dan operator, lalu footer.
+
+Halaman Programmer: layar, empat baris basis bilangan (HEX, DEC, OCT, BIN) yang tampil bersamaan, pilihan ukuran kata, tombol operasi bit, keypad angka (0-9 dan A-F), lalu footer.
+
+Halaman Konversi Satuan: pilihan kategori, kolom nilai dan satuan asal, tombol Tukar, kolom hasil dan satuan tujuan, daftar hasil ke semua satuan lain dalam kategori, lalu footer.
+
+Halaman Persen dan Diskon: pilihan jenis hitungan berupa tombol pilihan (segmen) dan formulirnya, bagian hasil, lalu footer.
+
+Halaman Tanggal: pilihan jenis hitungan berupa tombol pilihan (segmen) dan formulirnya, bagian hasil, lalu footer.
+
+Footer (di semua halaman): teks persis "by : Guber Smart", rata tengah, huruf kecil 14px, warna teks sekunder #3F6F6B, tanpa bingkai, tanpa tautan, tanpa kapsul. Letaknya di paling bawah halaman: bila isi halaman pendek, footer menempel di dasar layar; bila isi panjang, footer berada setelah isi. Footer tidak boleh menutupi tombol dan tidak boleh melayang di atas keypad.
+
+Riwayat (Standar dan Ilmiah)
+- Di HP: tombol Riwayat membuka panel dari bawah (bottom sheet) berisi daftar riwayat; menutup saat area luar diketuk.
+- Di tablet dan desktop (lebar di atas 1024px): panel Riwayat tampil tetap di samping kanan kalkulator.
+
+Tata letak
+- HP: satu kolom penuh lebar dengan jarak samping 16px; kalkulator Standar diusahakan muat dalam satu layar tanpa gulir halaman. Halaman Ilmiah dan Programmer boleh digulir ke bawah tetapi tidak boleh ada tombol yang terpotong atau tumpang tindih.
+- Desktop: kalkulator di tengah dalam kartu berlebar maksimum sekitar 420px (Standar), 520px (Ilmiah dan Programmer), dan 560px (alat hitung lain).
+
+## 5. Fitur dan Perilaku
+Semua fitur berikut dipakai oleh pengguna publik tanpa login dan tidak menyimpan data apa pun.
+
+**5.1 Kalkulator Standar**
+- Tombol: angka 0-9, koma desimal, tambah, kurang, kali, bagi, sama dengan, tanda ± (ganti positif/negatif), persen, akar kuadrat, kuadrat, kebalikan (1/x), C (hapus semua), CE (hapus angka yang sedang diketik), dan ⌫ (hapus satu angka terakhir).
+- Perhitungan mengikuti urutan operasi matematika (kali dan bagi didahulukan dari tambah dan kurang). Saat pengguna mengetik, hasil sementara langsung terlihat di baris hasil; setelah menekan sama dengan, rumus lengkap pindah ke baris atas dan hasil final tampil besar.
+- Menekan sama dengan berulang mengulang operasi terakhir (contoh 5 + 2 = lalu = lagi menjadi 9, lalu 11).
+- Persen: pada penjumlahan dan pengurangan, angka persen dihitung dari angka sebelumnya (200 + 10 % menjadi 200 + 20 = 220); pada kali dan bagi, persen menjadi per seratus (50 × 10 % = 5).
+- Mengetik angka baru setelah hasil final memulai hitungan baru; mengetik operator setelah hasil final melanjutkan dari hasil itu.
+- Batas masukan 16 angka. Angka tidak bisa diawali nol berlebih (007 menjadi 7).
+
+**5.2 Kalkulator Ilmiah**
+Memuat semua fitur Standar ditambah fungsi berikut (susunan tombol diserahkan kepada AI Studio, tetapi semua fungsi harus ada dan tombol tetap berukuran minimal 44px dalam grid 5 kolom di HP):
+- Trigonometri: sin, cos, tan; kebalikannya (sin⁻¹, cos⁻¹, tan⁻¹) lewat tombol 2nd; hiperbolik (sinh, cosh, tanh dan kebalikannya) lewat tombol Hyp.
+- Satuan sudut: tombol bergilir DEG, RAD, GRAD yang menampilkan satuan aktif (awal: DEG). Nilai istimewa harus tepat (sin 180° = 0, cos 90° = 0, tan 45° = 1).
+- Logaritma dan eksponen: log (basis 10), ln, log basis 2 (di lapisan 2nd), 10^x, e^x, x^y, akar ke-y (y√x), akar kuadrat, akar pangkat tiga, x², x³, 1/x.
+- Lainnya: faktorial (bilangan bulat 0 sampai 170), nilai mutlak, mod, permutasi (nPr), kombinasi (nCr), konstanta π dan e, bilangan acak (Rand, 0 sampai 1), EXP untuk notasi ilmiah (contoh 2 EXP 3 = 2000), tanda kurung buka dan tutup (bersarang tanpa batas), dan Ans (hasil sebelumnya).
+- Fungsi seperti sin membuka tanda kurung otomatis; tanda kurung yang belum ditutup ditutup otomatis saat sama dengan ditekan.
+
+**5.3 Kalkulator Programmer**
+- Empat baris basis tampil bersamaan dan selalu sinkron: HEX, DEC, OCT, BIN. Mengetuk satu baris menjadikannya basis aktif; keypad hanya mengaktifkan angka yang sah untuk basis itu (misalnya DEC tidak mengaktifkan A-F, BIN hanya 0 dan 1).
+- Ukuran kata dapat dipilih lewat tombol bergilir: QWORD (64 bit), DWORD (32 bit), WORD (16 bit), BYTE (8 bit); awal: QWORD. Bilangan bertanda (komplemen dua); hasil yang melebihi ukuran kata dibungkus (overflow) sesuai ukuran kata.
+- Operasi: tambah, kurang, kali, bagi (bilangan bulat), mod, AND, OR, XOR, NOT, NAND, NOR, geser kiri (<<), geser kanan (>>), ± , ⌫, C, dan sama dengan.
+- Hasil tidak memakai pemisah desimal; pembagian membuang sisa.
+
+**5.4 Konversi Satuan**
+- Kategori dan satuan: Panjang (mm, cm, m, km, inci, kaki, yard, mil, mil laut); Massa (mg, g, ons [100 g], kg, kuintal, ton, oz, lb); Suhu (°C, °F, K, °R [Reamur]); Volume (mL, L, cm³, m³, sdt [5 mL], sdm [15 mL], cangkir [240 mL], fl oz, galon AS); Luas (cm², m², are, hektare, km², inci², kaki², acre); Kecepatan (m/s, km/jam, mil/jam, knot, kaki/s); Waktu (milidetik, detik, menit, jam, hari, minggu, bulan [30,44 hari], tahun [365,25 hari]); Data (bit, byte, KB, MB, GB, TB, dengan 1 KB = 1024 byte); Tekanan (Pa, kPa, bar, atm, psi, mmHg); Energi (J, kJ, kal, kkal, kWh, BTU); Daya (W, kW, hp, PK); Sudut (derajat, radian, grad, putaran).
+- Pengguna memilih kategori, mengetik nilai, memilih satuan asal dan satuan tujuan; hasil terhitung langsung saat mengetik. Tombol Tukar menukar satuan asal dan tujuan beserta nilainya. Di bawahnya tampil daftar hasil ke semua satuan lain dalam kategori itu.
+- Pilihan kategori dan satuan memakai dropdown (di HP tampil sebagai bottom sheet). Hasil memakai format angka Indonesia dan dibulatkan secukupnya (maksimal 10 angka signifikan) tanpa angka nol di ujung.
+- Tombol Salin di samping hasil menyalin hasil.
+
+**5.5 Persen dan Diskon**
+Jenis hitungan dipilih lewat tombol pilihan; hasil terhitung langsung saat mengetik.
+- Persen dari: isian "Persen" dan "Dari angka" menghasilkan nilai persen tersebut (contoh 15 % dari 200 = 30).
+- Berapa persen: isian "Angka" dan "Dari" menghasilkan persentasenya (contoh 30 dari 200 = 15 %).
+- Selisih persen: isian "Dari" dan "Menjadi" menghasilkan persentase kenaikan atau penurunan beserta penandanya (+ atau −).
+- Diskon: isian "Harga awal (Rp)", "Diskon 1 (%)", dan "Diskon 2 (%)" yang boleh dikosongkan; hasil berupa jumlah potongan dan harga akhir (diskon kedua dihitung dari harga setelah diskon pertama).
+- PPN: isian "Harga (Rp)" dan "Tarif PPN (%)" (nilai awal 11, dapat diubah), dengan dua pilihan: tambah PPN (hasil PPN dan total) atau pisahkan PPN dari harga yang sudah termasuk PPN (hasil harga sebelum PPN dan jumlah PPN).
+- Kolom rupiah memakai pemisah ribuan otomatis saat diketik.
+
+**5.6 Tanggal**
+Jenis hitungan dipilih lewat tombol pilihan; tanggal dipilih lewat pemilih tanggal yang nyaman di HP; nama hari dan bulan berbahasa Indonesia. Nilai awal tanggal adalah hari ini.
+- Selisih tanggal: isian "Dari" dan "Sampai" menghasilkan selisih dalam tahun, bulan, dan hari; total hari; total minggu beserta sisa hari; dan jumlah hari kerja (Senin sampai Jumat). Dapat dipakai pula untuk menghitung usia.
+- Tambah atau kurang tanggal: isian "Tanggal awal", "Jumlah", dan satuan (hari, minggu, bulan, tahun) dengan pilihan Tambah atau Kurang; hasil berupa tanggal baru lengkap dengan nama harinya (contoh Senin, 5 Januari 2026).
+- Selisih dihitung benar untuk tahun kabisat dan akhir bulan.
+
+**5.7 Memori (Standar dan Ilmiah)**
+- M+ menambahkan angka layar ke memori, M− mengurangkannya, MR memanggil nilai memori ke layar, MC mengosongkan memori. Penanda "M" tampil sebagai teks biasa di layar saat memori terisi. Memori dipakai bersama oleh Standar dan Ilmiah selama halaman terbuka, tidak disimpan setelah halaman ditutup atau dimuat ulang.
+
+**5.8 Riwayat (Standar dan Ilmiah)**
+- Setiap hitungan yang diselesaikan dengan sama dengan masuk ke riwayat (rumus dan hasil), terbaru di atas, maksimal 100 entri.
+- Mengetuk satu entri memakai hasilnya sebagai angka di layar. Tombol Hapus Riwayat mengosongkan seluruh daftar dengan notifikasi singkat.
+- Riwayat hanya ada di memori saat halaman terbuka dan hilang saat ditutup atau dimuat ulang. Keadaan kosong: judul "Belum ada riwayat" tanpa penjelasan.
+
+**5.9 Salin Hasil**
+- Tombol Salin di layar (Standar, Ilmiah, Programmer) dan di samping hasil (alat hitung lain) menyalin angka hasil ke papan klip tanpa pemisah ribuan, memakai koma desimal, lalu menampilkan notifikasi "Tersalin" selama 0,5 detik.
+
+**5.10 Papan Ketik dan Tempel**
+- Di desktop: angka 0-9; titik atau koma sebagai desimal; + - * / sebagai operator; Enter atau = sebagai sama dengan; Backspace menghapus satu angka; Escape sebagai C; Delete sebagai CE; % ; tanda kurung ( ) dan ^ di mode Ilmiah. Menempel angka lewat Ctrl+V atau Cmd+V memasukkan angka itu ke layar; teks yang bukan angka diabaikan.
+
+**5.11 Format Angka dan Ketelitian**
+- Angka tampil dengan pemisah ribuan titik dan desimal koma; hasil sangat besar atau sangat kecil beralih ke notasi ilmiah (contoh 1,2345e+25).
+- Hasil ditampilkan hingga 15 angka signifikan dan kesalahan pembulatan desimal biner dihilangkan (0,1 + 0,2 tampil 0,3).
+
+**5.12 Galat**
+- Pembagian dengan nol menampilkan "Tidak bisa dibagi nol"; operasi di luar daerah definisi (akar bilangan negatif, log nol, faktorial bukan bilangan bulat) menampilkan "Masukan tidak valid"; hasil yang melampaui batas menampilkan "Terlalu besar". Pesan hanya tampil saat galat terjadi dan hilang saat pengguna menekan C atau mengetik angka baru. Aplikasi tidak pernah macet atau menampilkan tulisan teknis.
+
+## 6. Data Contoh
+- Tidak ada data awal yang disimpan atau ditampilkan. Layar kalkulator dimulai dengan 0, riwayat dan memori kosong.
+- Data yang tertulis di kode: daftar kategori dan satuan beserta faktor konversinya, nama hari dan bulan berbahasa Indonesia.
+
+## 7. Peran Pengguna dan Akses
+- Hanya satu jenis pengguna: publik. Tidak ada akun, kata sandi, peran, atau halaman terlindungi.
+- Tidak ada item menu "Masuk", dialog login, atau fitur ubah kata sandi.
+
+## 8. Keadaan Khusus
+- Riwayat kosong: judul singkat "Belum ada riwayat", tanpa ikon dan tanpa kalimat penjelasan.
+- Galat perhitungan: sesuai 5.12; tombol tetap berfungsi dan C selalu memulihkan layar.
+- Angka panjang: huruf layar mengecil otomatis, lalu beralih ke notasi ilmiah bila masih terlalu panjang; tidak pernah terpotong.
+- Tidak ada keadaan memuat yang terlihat (semua berjalan lokal dan seketika).
+- Aksesibilitas dasar: kontras cukup, fokus keyboard terlihat, setiap tombol bergambar atau bersimbol punya aria-label tersembunyi, hasil di layar dibacakan pembaca layar saat berubah.
+- Kinerja: ringan dan cepat dibuka di HP, tombol merespons sentuhan tanpa jeda, tidak ada lonjakan tampilan.
+- Judul halaman dan deskripsi singkat tersedia untuk tiap mode agar pratinjau saat dibagikan rapi.
+
+## Halaman Tetap Saat Dimuat Ulang
+Saat pengguna memuat ulang (refresh) atau membuka kembali aplikasi, aplikasi tetap berada di mode yang sedang dibuka, bukan kembali ke Standar. Setiap mode (Standar, Ilmiah, Programmer, Konversi Satuan, Persen dan Diskon, Tanggal) memiliki alamat sendiri yang bisa dibagikan dan dibuka langsung. Tombol kembali dan maju pada peramban atau HP berfungsi benar. Angka yang sedang dihitung, memori, dan riwayat tidak dipertahankan karena aplikasi tidak menyimpan data apa pun. Hal yang sama berlaku saat aplikasi dibuka offline (jika didukung).
+
+## Akses Offline dan Interaksi Mulus
+Jika didukung, aplikasi bisa dibuka dan dipakai saat offline: halaman dan tampilan tersimpan di perangkat, sedangkan data pengguna tidak disimpan sama sekali. Tampilkan teks status "Offline" yang singkat (tanpa bingkai) saat tidak ada koneksi.
+Interaksi sentuh harus mulus: gulir halaman halus tanpa tersendat, gestur geser (laci menu dan panel dari bawah) mengikuti jari dengan lancar dan berhenti rapi pada posisi yang tepat, tidak ada gulir ganda atau halaman terkunci, dan tidak ada lonjakan tampilan saat memuat.
+
+## 9. Integrasi
+Tidak ada integrasi dengan layanan eksternal apa pun. Seluruh perhitungan berjalan di perangkat pengguna tanpa server dan tanpa pengiriman data ke mana pun.
+
+## 10. Batasan
+Bagian ini hanya untuk AI Studio dan tidak boleh muncul di tampilan aplikasi.
+- Tidak ada penyimpanan data: jangan memakai localStorage, sessionStorage, cookie, IndexedDB, atau penyimpanan lain untuk data pengguna; jangan memakai server, basis data, pelacak, atau analitik. Riwayat dan memori hanya hidup di memori aplikasi selama halaman terbuka.
+- Tidak ada login, akun, panel admin, superadmin, CMS, maupun sinkronisasi apa pun.
+- Tidak ada konversi mata uang (membutuhkan kurs dari server) dan tidak ada iklan.
+- Tidak ada fitur PWA (pemasangan ke layar utama, ikon pasang, atau layar pembuka).
+- Jangan mengintegrasikan atau memasang layanan Firebase atau Firestore, kecuali tab Firebase nonaktif yang hanya berupa kerangka tampilan; seluruh penyimpanan memakai data lokal dan, bila diminta, Google Sheets lewat Apps Script. Aplikasi ini tidak memiliki panel admin, sehingga tab Firebase nonaktif pun tidak dibuat.
+
+## Aturan Wajib Deployment Vercel dan Kebersihan Dependensi
+Pastikan saat proyek di-push ke GitHub dan di-deploy ke Vercel tidak muncul error Command "npm install" exited with 1 maupun "npm run build" exited with 1.
+
+1. Pembuatan berkas .npmrc (wajib): buat berkas .npmrc di root proyek dengan satu baris isi: legacy-peer-deps=true. Ini wajib ada agar Vercel tidak mengalami kegagalan ERESOLVE saat menjalankan "npm install".
+2. Kebersihan package.json: hanya gunakan versi paket resmi dan stabil yang benar-benar ada di npm registry (misalnya typescript wajib versi ^5.x, bukan versi fiktif). Jangan pernah menambahkan paket internal bundler (seperti "esbuild") secara manual ke devDependencies jika proyek menggunakan Vite, karena Vite sudah mengelola versinya sendiri dan akan memicu konflik peer dependency fatal. Jangan memasang dependensi ganda atau paket yang tidak diimpor dalam kode.
+3. Ketepatan case-sensitivity (Linux Vercel): seluruh path impor (import ... from '...') wajib mencocokkan persis huruf besar dan huruf kecil nama berkas, karena server build Vercel berbasis Linux yang membedakan huruf besar dan kecil. Jangan mengimpor berkas atau ikon yang tidak diekspor oleh library.
+4. Uji mandiri sebelum selesai: sebelum menyatakan tugas selesai, jalankan verifikasi build ("npm run build" dan pemeriksaan lint atau typecheck). Pastikan exit status adalah 0 tanpa galat.
+
+## 11. Ringkasan Struktur Aplikasi
+- Halaman (semua publik, masing-masing beralamat sendiri): Standar, Ilmiah, Programmer, Konversi Satuan, Persen dan Diskon, Tanggal.
+- Modul dan fungsinya:
+  - Kerangka: Header (nama; menu horizontal di desktop), SidebarMenu (sidebar tersembunyi di HP dengan tombol pembuka 120x25), Footer ("by : Guber Smart"), Notifikasi (0,5 detik).
+  - Halaman: StandarPage, IlmiahPage, ProgrammerPage, KonversiSatuanPage, PersenDiskonPage, TanggalPage.
+  - Komponen bersama: Layar (rumus dan hasil), Keypad dan TombolKalkulator, BarisMemori, PanelRiwayat (bottom sheet di HP, panel samping di desktop), PilihanDropdown (bottom sheet di HP), TombolPilihan (segmen), KolomAngka (pemisah ribuan otomatis), PemilihTanggal.
+  - Logika: mesin hitung (urutan operasi, ketelitian, galat), pemformat angka Indonesia, data satuan dan faktor konversi, utilitas tanggal, utilitas basis bilangan dan operasi bit.
+  - Status sesi (hanya di memori): riwayat dan memori dibagi antara Standar dan Ilmiah.
+  - Konstanta: designSystem (aturan desain permanen), warna dan huruf.
+- Peran pengguna: hanya publik; tanpa login.
+- Koleksi data: tidak ada data yang disimpan; hanya status sesi di memori (riwayat, memori, nilai layar).
+- Pengaturan CMS: tidak ada.
+- Integrasi: tidak ada.
+- Gaya: modern toska (#0D9488, #0F766E, #2DD4BF, latar #F0FDFA), huruf Plus Jakarta Sans dan Inter, satu tema terang, tanpa ikon dekoratif, tanpa pill badge, notifikasi 0,5 detik.
+- Batasan: tanpa penyimpanan data, tanpa login/admin/CMS/sinkronisasi, tanpa konversi mata uang, tanpa PWA, aturan Vercel terpasang.
+
+## 12. Struktur Kode Modular
+Susun kode dalam modul-modul terpisah berupa komponen TSX: satu modul per halaman, per fitur, dan per bagian panel (admin, CMS, superadmin), ditambah komponen bersama yang dipakai ulang (menu, tombol, formulir, kartu, dialog, pengunggah gambar, grafik). Satu berkas satu tanggung jawab, berukuran wajar, bernama jelas, dan dikelompokkan dalam folder yang logis (misalnya halaman, komponen bersama, admin, data, dan konstanta), sehingga satu bagian bisa diubah tanpa menyentuh bagian lain. Pisahkan data dan pengaturan dari tampilan, dan letakkan aturan desain permanen di berkas tersendiri. Hindari satu berkas besar yang berisi banyak hal. Setiap revisi hanya mengubah modul yang diminta, tanpa menyentuh modul lain.
+
+PENTING: tampilan aplikasi harus bersih dan profesional seperti produk jadi, sempurna dan responsif di layar HP (menu, tombol, dan semua elemen rapi, proporsional, tidak ada yang tersembunyi), tanpa satu pun teks petunjuk, penjelasan fungsi, atau keterangan teknis (termasuk soal unggah file, Drive, Apps Script, atau spreadsheet). Hanya label, konten, pesan galat, dan notifikasi hasil aksi yang boleh tampil. Tombol, menu, dan kolom harus mudah dipakai dan dipahami lewat label yang jelas saja, tanpa ikon dekoratif dan tanpa badge atau chip berbentuk tombol palsu.
